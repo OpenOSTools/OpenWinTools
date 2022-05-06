@@ -1,0 +1,399 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "atlres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// 中文(简体，中国) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED
+#pragma code_page(936)
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\GUI_WTL.ico"
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOG 0, 0, 187, 102
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "About"
+FONT 9, "Segoe UI"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,130,81,50,14
+    CTEXT           "GUI_WTL Application v1.0\n\n(c) Copyright 2022",IDC_STATIC,25,57,78,32
+    ICON            IDR_MAINFRAME,IDC_STATIC,55,26,18,20
+    GROUPBOX        "",IDC_STATIC,7,7,115,88
+END
+
+IDD_MAINDLG DIALOGEX 0, 0, 772, 379
+STYLE DS_SETFONT | WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME
+EXSTYLE WS_EX_ACCEPTFILES
+CAPTION "GUI_WTL"
+FONT 9, "Segoe UI", 0, 0, 0x0
+BEGIN
+    PUSHBUTTON      "&About",ID_APP_ABOUT,715,0,50,11,NOT WS_VISIBLE
+    CONTROL         "",IDC_TAB_MAIN,"SysTabControl32",TCS_FOCUSNEVER,0,0,677,358
+END
+
+IDD_PROCESS DIALOGEX 0, 0, 560, 258
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    CONTROL         "",IDC_LIST_PROCESS,"SysListView32",LVS_REPORT | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,71,40,272,179
+END
+
+IDD_SYSINFO DIALOGEX 0, 0, 309, 176
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    CONTROL         "",IDC_LIST_SYSINFO,"SysListView32",LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,7,7,206,162
+END
+
+IDD_HOOK DIALOGEX 0, 0, 516, 291
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+END
+
+IDD_NETWORK DIALOGEX 0, 0, 309, 176
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+END
+
+IDD_FILE DIALOGEX 0, 0, 570, 288
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    CONTROL         "",IDC_TREE1,"SysTreeView32",WS_BORDER | WS_HSCROLL | WS_TABSTOP,0,0,121,287
+    CONTROL         "",IDC_LIST1,"SysListView32",LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,125,0,444,287
+END
+
+IDD_REGISTRY DIALOGEX 0, 0, 653, 353
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    CONTROL         "",IDC_TREE1,"SysTreeView32",WS_BORDER | WS_HSCROLL | WS_TABSTOP,0,0,213,353
+    CONTROL         "",IDC_LIST1,"SysListView32",LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,214,0,439,353
+END
+
+IDD_STARTUP DIALOGEX 0, 0, 309, 176
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+END
+
+IDD_KERNEL DIALOGEX 0, 0, 547, 357
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+END
+
+IDD_HARDWARE DIALOGEX 0, 0, 474, 295
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+END
+
+IDD_DEBUG DIALOGEX 0, 0, 313, 177
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+END
+
+IDD_BEHAVIOR DIALOGEX 0, 0, 309, 176
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD
+EXSTYLE WS_EX_NOACTIVATE
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO
+BEGIN
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 180
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 95
+    END
+
+    IDD_MAINDLG, DIALOG
+    BEGIN
+        RIGHTMARGIN, 765
+        BOTTOMMARGIN, 372
+    END
+
+    IDD_PROCESS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 553
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 251
+    END
+
+    IDD_SYSINFO, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 302
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 169
+    END
+
+    IDD_HOOK, DIALOG
+    BEGIN
+        RIGHTMARGIN, 309
+        BOTTOMMARGIN, 176
+    END
+
+    IDD_NETWORK, DIALOG
+    BEGIN
+    END
+
+    IDD_FILE, DIALOG
+    BEGIN
+        RIGHTMARGIN, 309
+        BOTTOMMARGIN, 176
+    END
+
+    IDD_REGISTRY, DIALOG
+    BEGIN
+    END
+
+    IDD_STARTUP, DIALOG
+    BEGIN
+    END
+
+    IDD_KERNEL, DIALOG
+    BEGIN
+        RIGHTMARGIN, 309
+        BOTTOMMARGIN, 176
+    END
+
+    IDD_HARDWARE, DIALOG
+    BEGIN
+        RIGHTMARGIN, 309
+        BOTTOMMARGIN, 176
+    END
+
+    IDD_DEBUG, DIALOG
+    BEGIN
+        RIGHTMARGIN, 309
+        BOTTOMMARGIN, 176
+    END
+
+    IDD_BEHAVIOR, DIALOG
+    BEGIN
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x2L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904b0"
+        BEGIN
+            VALUE "FileDescription", "GUI_WTL Module"
+            VALUE "FileVersion", "1, 0, 0, 1"
+            VALUE "InternalName", "GUI_WTL"
+            VALUE "LegalCopyright", "Copyright 2022"
+            VALUE "OriginalFilename", "GUI_WTL.exe"
+            VALUE "ProductName", "GUI_WTL Module"
+            VALUE "ProductVersion", "1, 0, 0, 1"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// AFX_DIALOG_LAYOUT
+//
+
+IDD_MAINDLG AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_PROCESS AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_SYSINFO AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_DEBUG AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_BEHAVIOR AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_FILE AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_REGISTRY AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_KERNEL AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_HARDWARE AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_HOOK AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MENU_PROC_OP MENU
+BEGIN
+    POPUP "进程"
+    BEGIN
+        MENUITEM "刷新(&R)",                      ID_32775
+        MENUITEM SEPARATOR
+        MENUITEM "模块(&D)",                      ID_32776
+        MENUITEM "线程(&T)",                      ID_32777
+        MENUITEM "内存(&M)",                      ID_32778
+        MENUITEM "句柄(&H)",                      ID_32779
+        MENUITEM SEPARATOR
+        MENUITEM "结束(&K)",                      ID_32780
+        MENUITEM "强制结束",                        ID_32781
+        MENUITEM "暴力结束",                        ID_32782
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE
+BEGIN
+    IDS_TAB_SYSINFO         "系统信息"
+    IDS_TAB_PROC            "进程"
+    IDS_TAB_FILE            "文件"
+    IDS_TAB_NET             "网络"
+    IDS_EXIT_CONFIRM        "确认退出进程?"
+END
+
+#endif    // 中文(简体，中国) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// 英语(美国) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""atlres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE
+BEGIN
+    IDS_TAB_SYSINFO         "Summary"
+END
+
+#endif    // 英语(美国) resources
+/////////////////////////////////////////////////////////////////////////////
+
+

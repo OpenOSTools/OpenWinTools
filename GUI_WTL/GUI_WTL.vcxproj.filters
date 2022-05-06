@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{61837f74-3c2f-473a-8437-2981da6b31db}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{3a69f1c8-a2bc-4244-98a3-d2d6d8836d02}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{b2b831db-53ec-419d-bb69-d43a50100903}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;jpg;jpeg;jpe;manifest</Extensions>
+    </Filter>
+    <Filter Include="Source Files\ChildDialog">
+      <UniqueIdentifier>{480daba1-8d28-48e6-85a8-726cd4115ac8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\ChildDialog">
+      <UniqueIdentifier>{b79eb7ea-905e-4d0d-8a01-97efe04e3810}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GUI_WTL.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MainDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CDlgBehavior.cpp">
+      <Filter>Source Files\ChildDialog</Filter>
+    </ClCompile>
+    <ClCompile Include="CDlgDebug.cpp">
+      <Filter>Source Files\ChildDialog</Filter>
+    </ClCompile>
+    <ClCompile Include="CDlgFile.cpp">
+      <Filter>Source Files\ChildDialog</Filter>
+    </ClCompile>
+    <ClCompile Include="CDlgHardware.cpp">
+      <Filter>Source Files\ChildDialog</Filter>
+    </ClCompile>
+    <ClCompile Include="CDlgHook.cpp">
+      <Filter>Source Files\ChildDialog</Filter>
+    </ClCompile>
+    <ClCompile Include="CDlgKernel.cpp">
+      <Filter>Source Files\ChildDialog</Filter>
+    </ClCompile>
+    <ClCompile Include="CDlgNetwork.cpp">
+      <Filter>Source Files\ChildDialog</Filter>
+    </ClCompile>
+    <ClCompile Include="CDlgProcess.cpp">
+      <Filter>Source Files\ChildDialog</Filter>
+    </ClCompile>
+    <ClCompile Include="CDlgRegistry.cpp">
+      <Filter>Source Files\ChildDialog</Filter>
+    </ClCompile>
+    <ClCompile Include="CDlgStartup.cpp">
+      <Filter>Source Files\ChildDialog</Filter>
+    </ClCompile>
+    <ClCompile Include="CDlgSysInfo.cpp">
+      <Filter>Source Files\ChildDialog</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MainDlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CDlgBehavior.h">
+      <Filter>Header Files\ChildDialog</Filter>
+    </ClInclude>
+    <ClInclude Include="CDlgDebug.h">
+      <Filter>Header Files\ChildDialog</Filter>
+    </ClInclude>
+    <ClInclude Include="CDlgFile.h">
+      <Filter>Header Files\ChildDialog</Filter>
+    </ClInclude>
+    <ClInclude Include="CDlgHardware.h">
+      <Filter>Header Files\ChildDialog</Filter>
+    </ClInclude>
+    <ClInclude Include="CDlgHook.h">
+      <Filter>Header Files\ChildDialog</Filter>
+    </ClInclude>
+    <ClInclude Include="CDlgKernel.h">
+      <Filter>Header Files\ChildDialog</Filter>
+    </ClInclude>
+    <ClInclude Include="CDlgNetwork.h">
+      <Filter>Header Files\ChildDialog</Filter>
+    </ClInclude>
+    <ClInclude Include="CDlgProcess.h">
+      <Filter>Header Files\ChildDialog</Filter>
+    </ClInclude>
+    <ClInclude Include="CDlgRegistry.h">
+      <Filter>Header Files\ChildDialog</Filter>
+    </ClInclude>
+    <ClInclude Include="CDlgStartup.h">
+      <Filter>Header Files\ChildDialog</Filter>
+    </ClInclude>
+    <ClInclude Include="CDlgSysInfo.h">
+      <Filter>Header Files\ChildDialog</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="GUI_WTL.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\GUI_WTL.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+</Project>

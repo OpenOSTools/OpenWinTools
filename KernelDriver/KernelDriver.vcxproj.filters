@@ -1,0 +1,208 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Driver Files">
+      <UniqueIdentifier>{8E41214B-6785-4CFE-B992-037D68949A14}</UniqueIdentifier>
+      <Extensions>inf;inv;inx;mof;mc;</Extensions>
+    </Filter>
+    <Filter Include="Source Files\KMemReadWrite">
+      <UniqueIdentifier>{46aefccc-fe35-4b6a-bef8-ed38c31cd6cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\KProcessThread">
+      <UniqueIdentifier>{1859421a-81ec-4f27-9f91-9b4904a8421a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\KFile">
+      <UniqueIdentifier>{6d45db92-e7a6-46e5-8dba-aae681f51da3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\KHook">
+      <UniqueIdentifier>{caa8aa82-51c7-4e2c-bdd5-26cfaad6f911}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\KNet">
+      <UniqueIdentifier>{903e9127-b3c1-40d0-9921-5fe51e3f44a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\KFilter">
+      <UniqueIdentifier>{d99d5c90-c279-425c-8837-e4eb0549ae18}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\KModule">
+      <UniqueIdentifier>{a941002c-1bb3-45bf-9053-337541bc88c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\KX86">
+      <UniqueIdentifier>{f778c237-eca1-47e0-97fc-3cfb7ac2bf17}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\KX86\CPU">
+      <UniqueIdentifier>{f634705a-74ff-43fb-b797-33d05c94031b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\KX86\CPU\MSR">
+      <UniqueIdentifier>{e969d814-904a-4f9c-ac16-a34d45fed357}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\KX86\Platform">
+      <UniqueIdentifier>{3a9ec65d-fb8f-4eb2-9c35-9bce4b585f1a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\KX86\Platform\CMOS">
+      <UniqueIdentifier>{97cedc4e-4ca6-4c42-9f6e-2523281d7970}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\KX86\Platform\APIC">
+      <UniqueIdentifier>{c3578555-6f83-4ce7-a9c8-42189415e3df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\KX86\Platform\ACPI">
+      <UniqueIdentifier>{9fa7bd4c-1b75-416a-8139-7f67dcca97c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\KX86\Platform\HPET">
+      <UniqueIdentifier>{920cea1b-f881-4c3b-a919-3fd6d6b2ebcd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\KX86\Platform\PCI">
+      <UniqueIdentifier>{24053d81-4f75-405b-8d7d-893fb8e53300}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\KX86\Platform\SMBios">
+      <UniqueIdentifier>{9904c714-f1a2-4557-a12b-57b39acdead1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\KX86\Platform\Port">
+      <UniqueIdentifier>{38acbb2c-bbd9-452e-bee7-c30b4ac9b5c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\KHook\TableHook">
+      <UniqueIdentifier>{d6bdc548-748c-4d03-af96-50e1b9698c58}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\KX86\CPU\Interrupt">
+      <UniqueIdentifier>{cfb62cc6-8151-49ce-9e4d-23118e24eeb6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\KX86\CPU\Register">
+      <UniqueIdentifier>{df0a888d-d3cc-44ba-869f-f26d843cde8f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\KX86\CPU\Memoory">
+      <UniqueIdentifier>{846ac0a7-b248-42a0-ac54-fd868fd31d9f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\KObj">
+      <UniqueIdentifier>{e0f58e37-26b0-4029-b844-288f816ee9d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\KObj\NDIS">
+      <UniqueIdentifier>{03e7236b-c214-4ed0-8866-66dbbdda3f66}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\KObj\TDI">
+      <UniqueIdentifier>{3a83b084-6ae7-432d-81e8-ae7b85d374ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\KObj\Callback">
+      <UniqueIdentifier>{1b789298-cf83-4517-a5a8-528ae3a96a25}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\KObj\DPC">
+      <UniqueIdentifier>{f24f6ded-021b-4552-86bd-084ab8e5f88b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\KObj\WorkItem">
+      <UniqueIdentifier>{ac8fa3d9-f906-4c33-81e6-64de14580cfc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\KHook\InlineHook">
+      <UniqueIdentifier>{fb624e58-0f06-4bbd-992e-0320174d9840}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\KPerf">
+      <UniqueIdentifier>{5471dd7c-d6f0-4c94-9dd6-db792e21df35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\KX86\Platform\PIT">
+      <UniqueIdentifier>{a012afeb-64f6-4ea5-8529-39c683267d97}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\KX86\Platform\PIC">
+      <UniqueIdentifier>{56348778-9c8c-4225-8092-0f385323d0ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\KX86\CPU\GDT">
+      <UniqueIdentifier>{518fea19-0954-4d40-9afc-0f9c59d0a217}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\KX86\CPU\IDT">
+      <UniqueIdentifier>{98826378-c8c7-443b-8fca-dce7afd7bdba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\KObj\Thread">
+      <UniqueIdentifier>{75acc355-4a96-442f-afc0-590e153bd51d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\KObj\Module">
+      <UniqueIdentifier>{3dc4e0c1-4b80-4104-aa5a-2e0f02862390}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\KObj\Process">
+      <UniqueIdentifier>{3254842f-b07d-4b4c-b5d1-7ed7ac8e58bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\KObj\PRCB">
+      <UniqueIdentifier>{5a46e65b-0430-480b-b2ee-17d7d5c1d59c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\KObj\PCR">
+      <UniqueIdentifier>{470a10b1-55e4-4fb4-9380-83729525d0d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\KObj\Disk">
+      <UniqueIdentifier>{a2bcaab9-8efb-444d-912f-e68e258f5853}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\KObj\Keyboard">
+      <UniqueIdentifier>{2614051d-13d9-4f36-aa05-ca82d988216c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\KObj\Minifilter">
+      <UniqueIdentifier>{f6e5508f-03d7-480a-88f0-cb9c461159ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\KObj\SFilter">
+      <UniqueIdentifier>{c2f8c3c4-bd46-45a0-8125-f583f823c86c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\KObj\TDIFilter">
+      <UniqueIdentifier>{a01d3484-af1d-4562-84de-2ebe43fea4cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\KObj\NDISFilter">
+      <UniqueIdentifier>{4981090d-407a-45cd-b085-9a43d0045211}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\KObj\WFPFilter">
+      <UniqueIdentifier>{bfe73043-fb3d-4c43-a2b2-d68f0bda5796}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\KObj\Socket">
+      <UniqueIdentifier>{00ae3780-3df4-4e2b-a0c1-a85c8a26f8d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\KObj\MsgHook">
+      <UniqueIdentifier>{dabf57c3-779e-4558-a318-db6bf752a1bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\KObj\TCPIP">
+      <UniqueIdentifier>{e4feb26a-467d-4f43-a2af-0bde9668cb93}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\KPerfCounter">
+      <UniqueIdentifier>{d6766fd0-40d2-4a01-96e2-bf355293c78c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\NewFilter1">
+      <UniqueIdentifier>{bf533002-1cfd-4864-99b4-60613c03005a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cpu.cpp">
+      <Filter>Source Files\KX86\CPU</Filter>
+    </ClCompile>
+    <ClCompile Include="IOControlHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="KProcess.cpp">
+      <Filter>Source Files\KProcessThread</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Main.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Shared\IOControl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cpu.h">
+      <Filter>Source Files\KX86\CPU</Filter>
+    </ClInclude>
+    <ClInclude Include="IOControlHandler.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="KProcess.h">
+      <Filter>Source Files\KProcessThread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Shared\NTTypes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
