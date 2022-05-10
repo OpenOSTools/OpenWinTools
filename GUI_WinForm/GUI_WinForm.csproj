@@ -34,17 +34,18 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>..\BuildOutput\Debug\AnyCPU\</OutputPath>
-	<IntermediateOutputPath>..\BuildOutput\TempObj\AnyCPU\Debug\</IntermediateOutputPath>
+    <IntermediateOutputPath>..\BuildOutput\TempObj\AnyCPU\Debug\</IntermediateOutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>..\BuildOutput\Release\AnyCPU\</OutputPath>
-	<IntermediateOutputPath>..\BuildOutput\TempObj\AnyCPU\Release\</IntermediateOutputPath>
+    <IntermediateOutputPath>..\BuildOutput\TempObj\AnyCPU\Release\</IntermediateOutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -104,7 +105,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  
   <PropertyGroup>
     <PreBuildEvent>
     </PreBuildEvent>

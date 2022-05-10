@@ -32,8 +32,10 @@ int main()
 	CSymParser::SymbolLayout _HalReturnToFirmware;
 	parser.GetSymbolLayout(_T("HalReturnToFirmware"), _HalReturnToFirmware);
 
-	CSymParser::SymbolLayout HalpInterruptController;
-	parser.GetSymbolLayout(_T("HalpInterruptController"), HalpInterruptController);
+	CSymParser::SymbolLayout PspCidTable;
+	parser.GetSymbolLayout(_T("PspCidTable"), PspCidTable);
 
+	CSymParser::SymbolLayout _HANDLE_TABLE;
+	parser.GetSymbolLayout(_T("_HANDLE_TABLE"), _HANDLE_TABLE);
 	return	0;
 }

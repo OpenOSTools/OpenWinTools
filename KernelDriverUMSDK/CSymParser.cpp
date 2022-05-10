@@ -186,7 +186,7 @@ BOOL CSymParser::GetSymTypeId(ULONG Index, ULONG& TypeId)
 	return SymGetTypeInfo(m_SymProcess, m_SymModBase, Index, TI_GET_TYPEID, &TypeId);
 }
 
-BOOL CSymParser::GetSymOffset(ULONG Index, ULONG& Offset)
+BOOL CSymParser::GetFiledOffset(ULONG Index, ULONG& Offset)
 {
 	return SymGetTypeInfo(m_SymProcess, m_SymModBase, Index, TI_GET_OFFSET, &Offset);;
 }
@@ -194,6 +194,10 @@ BOOL CSymParser::GetSymOffset(ULONG Index, ULONG& Offset)
 BOOL CSymParser::GetSymAddressOffset(ULONG Index, ULONG& Offset)
 {
 	return SymGetTypeInfo(m_SymProcess, m_SymModBase, Index, TI_GET_ADDRESSOFFSET, &Offset);
+}
+BOOL CSymParser::GetVAddressOffset(ULONG Index, ULONG& Offset)
+{
+	return SymGetTypeInfo(m_SymProcess, m_SymModBase, Index, TI_GET_VIRTUALBASEPOINTEROFFSET, &Offset);
 }
 
 BOOL CSymParser::GetSymBitPosition(ULONG Index, ULONG& BitPos)
@@ -215,11 +219,14 @@ BOOL CSymParser::GetSymbolLayout(LPCTSTR SymbolName, SymbolLayout& SymInfo)
 	
 	GetSymName(RootIndex, SymInfo.Name);
 	GetSymSize(RootIndex, SymInfo.Size);
-	GetSymOffset(RootIndex, SymInfo.Offset);
-	if (!SymInfo.Offset)
+	
+	if (RootSymbolInfo->Address > RootSymbolInfo->ModBase)
 	{
-		GetSymAddressOffset(RootIndex, SymInfo.Offset);
+		SymInfo.Offset = RootSymbolInfo->Address - RootSymbolInfo->ModBase;
 	}
+
+	
+
 	UINT64 s;
 	CStringW	n;
 	GetSymTypeName(RootIndex,&s,n);
@@ -253,7 +260,7 @@ BOOL CSymParser::GetSymbolLayout(LPCTSTR SymbolName, SymbolLayout& SymInfo)
 			GetSymTypeId(ChildIndex, TypeId);
 			GetSymName(ChildIndex, Entry.Name);
 			GetSymSize(TypeId, Entry.Size);
-			GetSymOffset(ChildIndex, Entry.Offset);
+			GetFiledOffset(ChildIndex, Entry.Offset);
 			GetSymTag(ChildIndex, Entry.SymTag);
 
 			Entry.IsBitField = GetSymBitPosition(ChildIndex, Entry.BitPosition);

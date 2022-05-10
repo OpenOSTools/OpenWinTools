@@ -17,6 +17,7 @@ namespace GUI_WinForm
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            
             Application.Run(new MainForm());
         }
         [System.Runtime.InteropServices.DllImport("user32.dll")]

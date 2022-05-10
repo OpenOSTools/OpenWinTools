@@ -27,27 +27,28 @@ LRESULT CMainDlg::OnInitDialog(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam
 
 	m_StatusBar.Create(this->m_hWnd, NULL, NULL, WS_CHILD | WS_VISIBLE | SBARS_SIZEGRIP);
 	int w[] = { 100,200,300,-1 };
-	m_StatusBar.SetParts(_countof(w), &w[0]);
-
+	m_StatusBar.SetParts(_countof(w), &w[0]);    
 	m_StatusBar.SetText(0, _T("1"));
 	m_StatusBar.SetText(1, _T("2"));
 
-	m_Tabs =
+    m_Tabs =
 	{ 
-		std::make_pair(LDS(IDS_TAB_SYSINFO),	(CWindow*)new CDlgSysInfo(this->m_hWnd)),
-		std::make_pair(LDS(IDS_TAB_PROC),		(CWindow*)new CDlgProcess(this->m_hWnd)),
-		std::make_pair(_T("内核"),						(CWindow*)new CDlgKernel(this->m_hWnd)),
-		std::make_pair(_T("钩子"),						(CWindow*)new CDlgHook(this->m_hWnd)),
-		std::make_pair(LDS(IDS_TAB_NET),		(CWindow*)new CDlgNetwork(this->m_hWnd)),
-		std::make_pair(LDS(IDS_TAB_FILE),		(CWindow*)new CDlgFile(this->m_hWnd)),
-		std::make_pair(_T("注册表"),						(CWindow*)new CDlgRegistry(this->m_hWnd)),
-		std::make_pair(_T("自启动"),						(CWindow*)new CDlgStartup(this->m_hWnd)),
-		std::make_pair(_T("硬件"),						(CWindow*)new CDlgHardWare(this->m_hWnd)),
-		std::make_pair(_T("调试"),						(CWindow*)new CDlgDebug(this->m_hWnd)),
-		std::make_pair(_T("行为"),						(CWindow*)new CDlgBehavior(this->m_hWnd))
+		std::make_pair(LDS(IDS_TAB_SYSINFO),        (CWindow*)new CDlgSysInfo(this->m_hWnd)),
+		std::make_pair(LDS(IDS_TAB_PROC),		    (CWindow*)new CDlgProcess(this->m_hWnd)),
+		std::make_pair(_T("内核"),                  (CWindow*)new CDlgKernel(this->m_hWnd)),
+		std::make_pair(_T("钩子"),                  (CWindow*)new CDlgHook(this->m_hWnd)),
+		std::make_pair(LDS(IDS_TAB_NET),            (CWindow*)new CDlgNetwork(this->m_hWnd)),
+		std::make_pair(LDS(IDS_TAB_FILE),            (CWindow*)new CDlgFile(this->m_hWnd)),
+		std::make_pair(_T("注册表"),	              (CWindow*)new CDlgRegistry(this->m_hWnd)),
+		std::make_pair(_T("自启动"),              (CWindow*)new CDlgStartup(this->m_hWnd)),
+		std::make_pair(_T("硬件"),                (CWindow*)new CDlgHardWare(this->m_hWnd)),
+		std::make_pair(_T("调试"),                (CWindow*)new CDlgDebug(this->m_hWnd)),
+		std::make_pair(_T("行为"),                (CWindow*)new CDlgBehavior(this->m_hWnd))
 	};
 
 	
+    m_TabMain.ModifyStyleEx(0, WS_EX_COMPOSITED);
+
 	for (auto it = m_Tabs.begin(); it != m_Tabs.end(); it++)
 	{
 		m_TabMain.AddItem(it->first);
@@ -93,7 +94,10 @@ LRESULT CMainDlg::OnBnClickedOk(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndC
 
 LRESULT CMainDlg::OnTcnSelchangeTabMain(int /*idCtrl*/, LPNMHDR pNMHDR, BOOL& /*bHandled*/)
 {
+    PAINTSTRUCT ps;
+
 	ResizeChildDlg();
+
 	return 0;
 }
 
@@ -109,6 +113,7 @@ LRESULT CMainDlg::OnTcnKeydownTabMain(int /*idCtrl*/, LPNMHDR pNMHDR, BOOL& /*bH
 
 LRESULT CMainDlg::OnTcnSelchangingTabMain(int /*idCtrl*/, LPNMHDR pNMHDR, BOOL& /*bHandled*/)
 {
+    
 	m_Tabs[m_TabMain.GetCurSel()].second->ShowWindow(SW_HIDE);
 	return 0;
 }

@@ -29,5 +29,10 @@ namespace GUI_WinForm
         {
 
         }
+
+        private void tabControlMain_SelectedIndexChanged(object sender, EventArgs e)
+        {
+           
+        }
     }
 }

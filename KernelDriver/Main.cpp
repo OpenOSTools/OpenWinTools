@@ -2,11 +2,18 @@
 #include "Main.h"
 #include "../Shared/IOControl.h"
 #include "IOControlHandler.h"
+#include "KDynData.h"
+#include "KProcess.h"
 
-
+PDEVICE_OBJECT	IODevObj;
 VOID OnUnload(PDRIVER_OBJECT pDrvObj)
 {
 	UNREFERENCED_PARAMETER(pDrvObj);
+	UNICODE_STRING	SymName;
+	RtlInitUnicodeString(&SymName, L"\\DosDevices\\OpenWinTools");
+	IoDeleteSymbolicLink(&SymName);
+
+	IoDeleteDevice(IODevObj);
 	DbgPrint("OnUnload\r\n");
 }
 
@@ -77,22 +84,68 @@ NTSTATUS OnIOControl(PDEVICE_OBJECT pDevObj, IRP* pIRP)
 	return	Status;
 }
 
-NTSTATUS DriverEntry(PDRIVER_OBJECT pDrvObj, PUNICODE_STRING pRegistryPath)
+NTSTATUS InitIODevice(PDRIVER_OBJECT pDrvObj)
 {
-	UNREFERENCED_PARAMETER(pRegistryPath);
+	NTSTATUS		Status;
+	UNICODE_STRING	DeviceName;
+	RtlInitUnicodeString(&DeviceName, L"\\Device\\OpenWinTools");
+	Status = IoCreateDevice(pDrvObj, 0, &DeviceName, FILE_DEVICE_UNKNOWN, 0, FALSE, &IODevObj);
 
-	
-	
-	for (size_t n = 0; n < IRP_MJ_MAXIMUM_FUNCTION; n++)
-	{
-		pDrvObj->MajorFunction[n] = OnInvalidDeviceRequest;
+	if (!SUCCESS(Status)){
+		return Status;
 	}
-	
-	pDrvObj->MajorFunction[IRP_MJ_DEVICE_CONTROL] = OnIOControl;
-	pDrvObj->MajorFunction[IRP_MJ_CREATE] = OnDeviceCreate;
-	pDrvObj->MajorFunction[IRP_MJ_CLOSE] = OnDeviceClose;
-	pDrvObj->MajorFunction[IRP_MJ_CLEANUP] = OnDeviceCleanup;
-	pDrvObj->DriverUnload = OnUnload;
 
-	return STATUS_SUCCESS;
+	UNICODE_STRING	SymName;
+	RtlInitUnicodeString(&SymName, L"\\DosDevices\\OpenWinTools");
+	IoDeleteSymbolicLink(&SymName);
+	Status = IoCreateSymbolicLink(&SymName, &DeviceName);
+
+	if (!SUCCESS(Status)){
+		IoDeleteDevice(IODevObj);
+	}
+	IODevObj->Flags &= ~DO_DEVICE_INITIALIZING;
+	return	Status;
+}
+
+VOID InitDispatch(PDRIVER_OBJECT DrvObj)
+{
+	for (size_t n = 0; n < IRP_MJ_MAXIMUM_FUNCTION; n++){
+		DrvObj->MajorFunction[n] = OnInvalidDeviceRequest;
+	}
+
+	DrvObj->MajorFunction[IRP_MJ_DEVICE_CONTROL] = OnIOControl;
+	DrvObj->MajorFunction[IRP_MJ_CREATE] = OnDeviceCreate;
+	DrvObj->MajorFunction[IRP_MJ_CLOSE] = OnDeviceClose;
+	DrvObj->MajorFunction[IRP_MJ_CLEANUP] = OnDeviceCleanup;
+	DrvObj->DriverUnload = OnUnload;
+}
+
+NTSTATUS DriverEntry(PDRIVER_OBJECT DrvObj, PUNICODE_STRING RegistryPath)
+{
+	UNREFERENCED_PARAMETER(RegistryPath);
+	UNREFERENCED_PARAMETER(DrvObj);
+	ULONG n = 0;
+	
+	HandleEnumKernelModule(n, n, NULL);
+
+	return	STATUS_UNSATISFIED_DEPENDENCIES;
+
+/*
+	
+	InitDispatch(DrvObj);
+	IOControlInit();
+
+	NTSTATUS Status = KData_Init();
+
+	if (!SUCCESS(Status)){
+		return	Status;
+	}
+
+	Status = InitIODevice(DrvObj);
+
+	if (!SUCCESS(Status)){
+		return	Status;
+	}
+
+	return STATUS_SUCCESS;*/
 }

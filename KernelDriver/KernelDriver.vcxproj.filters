@@ -167,9 +167,6 @@
     <Filter Include="Source Files\KPerfCounter">
       <UniqueIdentifier>{d6766fd0-40d2-4a01-96e2-bf355293c78c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\NewFilter1">
-      <UniqueIdentifier>{bf533002-1cfd-4864-99b4-60613c03005a}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -183,6 +180,12 @@
     </ClCompile>
     <ClCompile Include="KProcess.cpp">
       <Filter>Source Files\KProcessThread</Filter>
+    </ClCompile>
+    <ClCompile Include="KDynData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="KUtils.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -203,6 +206,12 @@
     </ClInclude>
     <ClInclude Include="..\Shared\NTTypes.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="KDynData.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="KUtils.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

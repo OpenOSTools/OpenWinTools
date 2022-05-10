@@ -1,14 +1,14 @@
-#include "NTTypes.h"
-
 #ifndef _IOCONTROL_
 #define _IOCONTROL_
 
-#define IOCTL_EVERYTHING			CTL_CODE(FILE_DEVICE_UNKNOWN, 0x1000, METHOD_BUFFERED, FILE_ANY_ACCESS)
+#include "NTTypes.h"
 
+#define IOCTL_EVERYTHING			CTL_CODE(FILE_DEVICE_UNKNOWN, 0x1000, METHOD_BUFFERED, FILE_ANY_ACCESS)
 
 enum IOCODE
 {
 	IOCodeMin = 0,
+	IOInitOffset,
 	IOEnumProcess,
 	IOEnumThread,
 	IOEnumHandle,
@@ -25,8 +25,6 @@ enum IOCODE
 
 	IOCodeMAX
 };
-
-
 
 struct IOCTL_BUFF
 {
@@ -52,14 +50,21 @@ struct PROC_PERF_COUNTER
 
 struct IOProcessInfo
 {
-	unsigned __int64	PID;
-	unsigned __int64	ParentPID;
-	WCHAR				ProcessName[MAX_PATH];
-
+	HANDLE	PID;
+	HANDLE	ParentPID;
+	PVOID	ProcessObj;
+	char	PsName[17];
 	PROC_PERF_COUNTER	PerfCounter;
-	
 };
 
+struct IOKernelModuleInfo
+{
+	PVOID Base;
+	ULONG Size;
+	ULONG Order;
+
+	WCHAR	Name[MAX_PATH];
+};
 
 struct IOThreadInfo
 {
@@ -68,6 +73,14 @@ struct IOThreadInfo
 	unsigned __int64 EntryPoint;
 	unsigned int	 SuspendCount;
 	unsigned int	 CreationTime;
+};
+
+enum DATA_TYPE
+{
+	Base_NTOS,
+	Offset_PSPCIDTABLE,
+	Offset_NextPID,
+	DATA_MAX
 };
 
 

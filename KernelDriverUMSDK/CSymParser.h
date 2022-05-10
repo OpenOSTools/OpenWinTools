@@ -35,6 +35,7 @@ public:
 
 	struct SYMINFO
 	{
+		PSYMBOL_INFOW DataPtr;
 		CBufferPtr	TempBuff;
 		operator PSYMBOL_INFOW() const throw()
 		{
@@ -49,6 +50,7 @@ public:
 		#define SYM_INFO_SIZE (sizeof(SYMBOL_INFOW) + (MAX_SYM_NAME + 1) * sizeof(WCHAR))
 		SYMINFO() :TempBuff(SYM_INFO_SIZE, true)
 		{
+			DataPtr = (PSYMBOL_INFOW)TempBuff.Ptr();
 			if (TempBuff.Ptr())
 			{
 				operator PSYMBOL_INFOW()->MaxNameLen = MAX_SYM_NAME;
@@ -70,9 +72,14 @@ public:
 	struct SymbolLayout {
 		CStringW Name;
 		UINT64 Size;
-		ULONG Offset;
+		UINT64 Offset;
 		enum SymTagEnum SymTag;
 		std::vector<MemberInfo> Entries;
+		SymbolLayout()
+		{
+			Size = 0;
+			Offset = 0;
+		}
 	};
 
 public:
@@ -87,8 +94,9 @@ private:
 	BOOL GetSymBaseType(ULONG Index, enum BasicType& Type);
 	BOOL GetSymArrayTypeId(ULONG Index, ULONG& ArrayTypeID);
 	BOOL GetSymTypeId(ULONG Index, ULONG& SymTypeID);
-	BOOL GetSymOffset(ULONG Index, ULONG& Offset);
+	BOOL GetFiledOffset(ULONG Index, ULONG& Offset);
 	BOOL GetSymAddressOffset(ULONG Index, ULONG& SymAddrOffset);
+	BOOL GetVAddressOffset(ULONG Index, ULONG& Offset);
 	BOOL GetSymBitPosition(ULONG Index, ULONG& BitPos);
 
 private:

@@ -31,18 +31,24 @@ namespace GUI_WinForm
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            this.ProcessListMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.fsafsdToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dsafToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tabControlMain = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.List_Process = new System.Windows.Forms.ListView();
-            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.PID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.名称 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.用户 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.CPU = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.内存 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.CPU时间 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.GPU = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.路径 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.命令行 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.tabControl3 = new System.Windows.Forms.TabControl();
@@ -87,25 +93,55 @@ namespace GUI_WinForm
             this.tabPage10 = new System.Windows.Forms.TabPage();
             this.tabPage11 = new System.Windows.Forms.TabPage();
             this.tabPage12 = new System.Windows.Forms.TabPage();
-            this.ProcessListMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.fsafsdToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.dsafToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.dToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.EPROCESS = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ProcessListMenu.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
             this.tabControlMain.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage4.SuspendLayout();
             this.tabControl3.SuspendLayout();
             this.tabPage8.SuspendLayout();
             this.tabControl2.SuspendLayout();
-            this.ProcessListMenu.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // ProcessListMenu
+            // 
+            this.ProcessListMenu.ImageScalingSize = new System.Drawing.Size(40, 40);
+            this.ProcessListMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fsafsdToolStripMenuItem,
+            this.dsafToolStripMenuItem,
+            this.dToolStripMenuItem});
+            this.ProcessListMenu.Name = "contextMenuStrip1";
+            resources.ApplyResources(this.ProcessListMenu, "ProcessListMenu");
+            // 
+            // fsafsdToolStripMenuItem
+            // 
+            this.fsafsdToolStripMenuItem.Name = "fsafsdToolStripMenuItem";
+            resources.ApplyResources(this.fsafsdToolStripMenuItem, "fsafsdToolStripMenuItem");
+            // 
+            // dsafToolStripMenuItem
+            // 
+            this.dsafToolStripMenuItem.Name = "dsafToolStripMenuItem";
+            resources.ApplyResources(this.dsafToolStripMenuItem, "dsafToolStripMenuItem");
+            // 
+            // dToolStripMenuItem
+            // 
+            this.dToolStripMenuItem.Name = "dToolStripMenuItem";
+            resources.ApplyResources(this.dToolStripMenuItem, "dToolStripMenuItem");
+            // 
+            // tableLayoutPanel1
+            // 
+            resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
+            this.tableLayoutPanel1.Controls.Add(this.tabControlMain, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.statusStrip1, 0, 1);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // tabControlMain
             // 
@@ -125,6 +161,7 @@ namespace GUI_WinForm
             resources.ApplyResources(this.tabControlMain, "tabControlMain");
             this.tabControlMain.Name = "tabControlMain";
             this.tabControlMain.SelectedIndex = 0;
+            this.tabControlMain.SelectedIndexChanged += new System.EventHandler(this.tabControlMain_SelectedIndexChanged);
             // 
             // tabPage1
             // 
@@ -143,14 +180,16 @@ namespace GUI_WinForm
             // 
             this.List_Process.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.List_Process.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader1,
-            this.columnHeader2,
-            this.columnHeader3,
-            this.columnHeader4,
-            this.columnHeader5,
-            this.columnHeader6,
-            this.columnHeader7,
-            this.columnHeader8});
+            this.PID,
+            this.EPROCESS,
+            this.名称,
+            this.用户,
+            this.CPU,
+            this.内存,
+            this.CPU时间,
+            this.GPU,
+            this.路径,
+            this.命令行});
             this.List_Process.ContextMenuStrip = this.ProcessListMenu;
             resources.ApplyResources(this.List_Process, "List_Process");
             this.List_Process.FullRowSelect = true;
@@ -166,39 +205,42 @@ namespace GUI_WinForm
             this.List_Process.Name = "List_Process";
             this.List_Process.UseCompatibleStateImageBehavior = false;
             this.List_Process.View = System.Windows.Forms.View.Details;
-            this.List_Process.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ProcessList_MouseClick);
             // 
-            // columnHeader1
+            // PID
             // 
-            resources.ApplyResources(this.columnHeader1, "columnHeader1");
+            resources.ApplyResources(this.PID, "PID");
             // 
-            // columnHeader2
+            // 名称
             // 
-            resources.ApplyResources(this.columnHeader2, "columnHeader2");
+            resources.ApplyResources(this.名称, "名称");
             // 
-            // columnHeader3
+            // 用户
             // 
-            resources.ApplyResources(this.columnHeader3, "columnHeader3");
+            resources.ApplyResources(this.用户, "用户");
             // 
-            // columnHeader4
+            // CPU
             // 
-            resources.ApplyResources(this.columnHeader4, "columnHeader4");
+            resources.ApplyResources(this.CPU, "CPU");
             // 
-            // columnHeader5
+            // 内存
             // 
-            resources.ApplyResources(this.columnHeader5, "columnHeader5");
+            resources.ApplyResources(this.内存, "内存");
             // 
-            // columnHeader6
+            // CPU时间
             // 
-            resources.ApplyResources(this.columnHeader6, "columnHeader6");
+            resources.ApplyResources(this.CPU时间, "CPU时间");
             // 
-            // columnHeader7
+            // GPU
             // 
-            resources.ApplyResources(this.columnHeader7, "columnHeader7");
+            resources.ApplyResources(this.GPU, "GPU");
             // 
-            // columnHeader8
+            // 路径
             // 
-            resources.ApplyResources(this.columnHeader8, "columnHeader8");
+            resources.ApplyResources(this.路径, "路径");
+            // 
+            // 命令行
+            // 
+            resources.ApplyResources(this.命令行, "命令行");
             // 
             // tabPage3
             // 
@@ -498,33 +540,9 @@ namespace GUI_WinForm
             this.tabPage12.Name = "tabPage12";
             this.tabPage12.UseVisualStyleBackColor = true;
             // 
-            // ProcessListMenu
-            // 
-            this.ProcessListMenu.ImageScalingSize = new System.Drawing.Size(40, 40);
-            this.ProcessListMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fsafsdToolStripMenuItem,
-            this.dsafToolStripMenuItem,
-            this.dToolStripMenuItem});
-            this.ProcessListMenu.Name = "contextMenuStrip1";
-            resources.ApplyResources(this.ProcessListMenu, "ProcessListMenu");
-            // 
-            // fsafsdToolStripMenuItem
-            // 
-            this.fsafsdToolStripMenuItem.Name = "fsafsdToolStripMenuItem";
-            resources.ApplyResources(this.fsafsdToolStripMenuItem, "fsafsdToolStripMenuItem");
-            // 
-            // dsafToolStripMenuItem
-            // 
-            this.dsafToolStripMenuItem.Name = "dsafToolStripMenuItem";
-            resources.ApplyResources(this.dsafToolStripMenuItem, "dsafToolStripMenuItem");
-            // 
-            // dToolStripMenuItem
-            // 
-            this.dToolStripMenuItem.Name = "dToolStripMenuItem";
-            resources.ApplyResources(this.dToolStripMenuItem, "dToolStripMenuItem");
-            // 
             // statusStrip1
             // 
+            this.statusStrip1.GripMargin = new System.Windows.Forms.Padding(0);
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(40, 40);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1,
@@ -532,6 +550,7 @@ namespace GUI_WinForm
             this.toolStripStatusLabel3,
             this.toolStripStatusLabel4,
             this.toolStripStatusLabel5});
+            this.statusStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
             resources.ApplyResources(this.statusStrip1, "statusStrip1");
             this.statusStrip1.Name = "statusStrip1";
             // 
@@ -539,7 +558,6 @@ namespace GUI_WinForm
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
             resources.ApplyResources(this.toolStripStatusLabel1, "toolStripStatusLabel1");
-            this.toolStripStatusLabel1.Click += new System.EventHandler(this.toolStripStatusLabel1_Click);
             // 
             // toolStripStatusLabel2
             // 
@@ -561,22 +579,27 @@ namespace GUI_WinForm
             this.toolStripStatusLabel5.Name = "toolStripStatusLabel5";
             resources.ApplyResources(this.toolStripStatusLabel5, "toolStripStatusLabel5");
             // 
+            // EPROCESS
+            // 
+            resources.ApplyResources(this.EPROCESS, "EPROCESS");
+            // 
             // MainForm
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.Controls.Add(this.statusStrip1);
-            this.Controls.Add(this.tabControlMain);
+            this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "MainForm";
             this.Load += new System.EventHandler(this.MainForm_Load);
+            this.ProcessListMenu.ResumeLayout(false);
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
             this.tabControlMain.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.tabPage4.ResumeLayout(false);
             this.tabControl3.ResumeLayout(false);
             this.tabPage8.ResumeLayout(false);
             this.tabControl2.ResumeLayout(false);
-            this.ProcessListMenu.ResumeLayout(false);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -585,51 +608,26 @@ namespace GUI_WinForm
         }
 
         #endregion
-
-        private System.Windows.Forms.TabControl tabControlMain;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.TabPage tabPage4;
-        private System.Windows.Forms.TabPage tabPage5;
-        private System.Windows.Forms.TabPage tabPage6;
-        private System.Windows.Forms.TabPage tabPage7;
-        private System.Windows.Forms.TabPage tabPage8;
-        private System.Windows.Forms.TabPage tabPage9;
-        private System.Windows.Forms.TabPage tabPage10;
-        private System.Windows.Forms.TabPage tabPage11;
-        private System.Windows.Forms.TabPage tabPage12;
-        private System.Windows.Forms.ListView List_Process;
-        private System.Windows.Forms.ColumnHeader columnHeader1;
-        private System.Windows.Forms.ColumnHeader columnHeader2;
-        private System.Windows.Forms.ColumnHeader columnHeader3;
-        private System.Windows.Forms.ColumnHeader columnHeader4;
-        private System.Windows.Forms.ColumnHeader columnHeader5;
-        private System.Windows.Forms.ColumnHeader columnHeader6;
-        private System.Windows.Forms.ColumnHeader columnHeader7;
-        private System.Windows.Forms.ColumnHeader columnHeader8;
         private System.Windows.Forms.ContextMenuStrip ProcessListMenu;
         private System.Windows.Forms.ToolStripMenuItem fsafsdToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem dsafToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem dToolStripMenuItem;
-        private System.Windows.Forms.TabControl tabControl2;
-        private System.Windows.Forms.TabPage tabPageACPI;
-        private System.Windows.Forms.TabPage tabPagePCI;
-        private System.Windows.Forms.TabPage tabPageAPIC;
-        private System.Windows.Forms.TabPage tabPageTimers;
-        private System.Windows.Forms.TabPage tabPageSMBUS;
-        private System.Windows.Forms.TabPage tabPageDIMM;
-        private System.Windows.Forms.TabPage tabPageCPU;
-        private System.Windows.Forms.TabPage tabPageIOPorts;
-        private System.Windows.Forms.TabPage tabPageMMIO;
-        private System.Windows.Forms.TabPage tabPageDMA;
-        private System.Windows.Forms.TabPage tabPageDisk;
-        private System.Windows.Forms.TabPage tabPageUSB;
-        private System.Windows.Forms.TabPage tabPageVideo;
-        private System.Windows.Forms.TabPage tabPageTPM;
-        private System.Windows.Forms.TabPage tabPageNIC;
-        private System.Windows.Forms.TabPage tabPageMonitor;
-        private System.Windows.Forms.TabPage tabPageIOAPIC;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.TabControl tabControlMain;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.ListView List_Process;
+        private System.Windows.Forms.ColumnHeader PID;
+        private System.Windows.Forms.ColumnHeader 名称;
+        private System.Windows.Forms.ColumnHeader 用户;
+        private System.Windows.Forms.ColumnHeader CPU;
+        private System.Windows.Forms.ColumnHeader CPU时间;
+        private System.Windows.Forms.ColumnHeader GPU;
+        private System.Windows.Forms.ColumnHeader 路径;
+        private System.Windows.Forms.ColumnHeader 内存;
+        private System.Windows.Forms.ColumnHeader 命令行;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.TabControl tabControl3;
         private System.Windows.Forms.TabPage tabPageKModule;
         private System.Windows.Forms.TabPage tabPageCallback;
@@ -646,12 +644,39 @@ namespace GUI_WinForm
         private System.Windows.Forms.TabPage tabPageSSSDT;
         private System.Windows.Forms.TabPage tabPageObject;
         private System.Windows.Forms.TabPage tabPageHAL;
+        private System.Windows.Forms.TabPage tabPage5;
+        private System.Windows.Forms.TabPage tabPage6;
+        private System.Windows.Forms.TabPage tabPage7;
+        private System.Windows.Forms.TabPage tabPage8;
+        private System.Windows.Forms.TabControl tabControl2;
+        private System.Windows.Forms.TabPage tabPageACPI;
+        private System.Windows.Forms.TabPage tabPageAPIC;
+        private System.Windows.Forms.TabPage tabPageIOAPIC;
+        private System.Windows.Forms.TabPage tabPagePCI;
+        private System.Windows.Forms.TabPage tabPageTimers;
+        private System.Windows.Forms.TabPage tabPageSMBUS;
+        private System.Windows.Forms.TabPage tabPageDIMM;
+        private System.Windows.Forms.TabPage tabPageCPU;
+        private System.Windows.Forms.TabPage tabPageIOPorts;
+        private System.Windows.Forms.TabPage tabPageMMIO;
+        private System.Windows.Forms.TabPage tabPageDMA;
+        private System.Windows.Forms.TabPage tabPageDisk;
+        private System.Windows.Forms.TabPage tabPageUSB;
+        private System.Windows.Forms.TabPage tabPageVideo;
+        private System.Windows.Forms.TabPage tabPageTPM;
+        private System.Windows.Forms.TabPage tabPageNIC;
+        private System.Windows.Forms.TabPage tabPageMonitor;
+        private System.Windows.Forms.TabPage tabPage9;
+        private System.Windows.Forms.TabPage tabPage10;
+        private System.Windows.Forms.TabPage tabPage11;
+        private System.Windows.Forms.TabPage tabPage12;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel4;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel5;
+        private System.Windows.Forms.ColumnHeader EPROCESS;
     }
 }
 
