@@ -138,20 +138,24 @@
   <ItemGroup>
     <ClCompile Include="cpu.cpp" />
     <ClCompile Include="IOControlHandler.cpp" />
+    <ClCompile Include="KClass.cpp" />
     <ClCompile Include="KDynData.cpp" />
     <ClCompile Include="KProcess.cpp" />
     <ClCompile Include="KUtils.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="stdafx.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Shared\IOControl.h" />
     <ClInclude Include="..\Shared\NTTypes.h" />
     <ClInclude Include="cpu.h" />
     <ClInclude Include="IOControlHandler.h" />
+    <ClInclude Include="KClass.h" />
     <ClInclude Include="KDynData.h" />
     <ClInclude Include="KProcess.h" />
     <ClInclude Include="KUtils.h" />
     <ClInclude Include="Main.h" />
+    <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

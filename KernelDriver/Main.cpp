@@ -1,9 +1,11 @@
-#include <ntifs.h>
+#include "stdafx.h"
 #include "Main.h"
 #include "../Shared/IOControl.h"
 #include "IOControlHandler.h"
 #include "KDynData.h"
 #include "KProcess.h"
+
+
 
 PDEVICE_OBJECT	IODevObj;
 VOID OnUnload(PDRIVER_OBJECT pDrvObj)
@@ -120,11 +122,16 @@ VOID InitDispatch(PDRIVER_OBJECT DrvObj)
 	DrvObj->DriverUnload = OnUnload;
 }
 
+
 NTSTATUS DriverEntry(PDRIVER_OBJECT DrvObj, PUNICODE_STRING RegistryPath)
 {
 	UNREFERENCED_PARAMETER(RegistryPath);
 	UNREFERENCED_PARAMETER(DrvObj);
 	ULONG n = 0;
+
+    KSpinLock* Lock = new(PagedPool) KSpinLock;
+
+    delete Lock;
 	
 	HandleEnumKernelModule(n, n, NULL);
 
