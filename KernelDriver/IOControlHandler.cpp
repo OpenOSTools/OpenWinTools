@@ -21,18 +21,26 @@ VOID IOControlInit()
 	{
 		IOCallback[i] = InvalidIOControl;
 	}
-	IOCallback[IOEnumProcess] = HandleEnumProcess;
+	IOCallback[IOEnumProcess]   = HandleEnumProcess;
+    IOCallback[IOEnumKMod]      = HandleEnumKernelModule;
+    IOCallback[IORWPort]        = HandlePIO;
 }
 
 NTSTATUS HandleIOControl(ULONG& ulInputLen, ULONG& ulOutputLen, PVOID pBuffer)
 {
 	NTSTATUS Status = STATUS_INVALID_DEVICE_REQUEST;
 	IOCTL_BUFF* IOBuff = (IOCTL_BUFF*)pBuffer;
-	ULONG		IOCode = IOBuff->dwCtlCode;
 
+    if (ulInputLen < sizeof(IOCTL_BUFF))
+    {
+        return  STATUS_INVALID_BUFFER_SIZE;
+    }
+
+	ULONG		IOCode = IOBuff->dwCtlCode;
+    
 	if (IOCode < IOCodeMAX)
 	{
-		WARN_ON(!IOCallback[IOCode]);
+		KASSRT(IOCallback[IOCode] != NULL);
 		Status = IOCallback[IOCode](ulInputLen, ulOutputLen, pBuffer);
 	}
 

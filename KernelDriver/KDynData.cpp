@@ -38,7 +38,7 @@ NTSTATUS KData_Init()
 		PEPROCESS	TaskStruct = NULL;
 		if (NT_SUCCESS(PsLookupProcessByProcessId((HANDLE)i, &TaskStruct)))
 		{
-			WARN_ON(!TaskStruct);
+			KASSRT(TaskStruct != NULL);
 			ObDereferenceObject(TaskStruct);
 		}
 	}

@@ -169,7 +169,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Main.cpp">
+    <ClCompile Include="KMain.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="cpu.cpp">

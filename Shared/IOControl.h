@@ -10,26 +10,38 @@ enum IOCODE
 	IOCodeMin = 0,
 	IOInitOffset,
 	IOEnumProcess,
+    IOEnumKMod,
+    IOEnumUMod,
 	IOEnumThread,
 	IOEnumHandle,
 	IOEnumTCP,
 	IOEnumWindows,
 	IOEnumMsgHook,
-	IOReadMemory,
-	IOWriteMemory,
-	IOReadPort,
-	IOReadMSR,
-	IOWriteMSR,
-	IOReadPhyMem,
-	IOWritePhyMem,
+	IORWMemory,
+	IORWPort,
+	IORWMSR,
+    IORWPhyMem,
 
 	IOCodeMAX
+};
+
+struct IOPORTInfo
+{
+    int     IOType;
+    ULONG   IOLength;
+    ULONG   IOPort;
+    ULONG   WriteData;
 };
 
 struct IOCTL_BUFF
 {
 	IOCODE	dwCtlCode;
-	unsigned char	data[1];
+    union
+    {
+        IOPORTInfo PIO;
+
+    };
+    
 };
 
 struct PROC_PERF_COUNTER 
@@ -44,8 +56,6 @@ struct PROC_PERF_COUNTER
 	LARGE_INTEGER ThreadCount;
 	LARGE_INTEGER HandleCount;
 	LARGE_INTEGER PageFaultCount;
-
-
 };
 
 struct IOProcessInfo

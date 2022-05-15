@@ -37,5 +37,10 @@ int main()
 
 	CSymParser::SymbolLayout _HANDLE_TABLE;
 	parser.GetSymbolLayout(_T("_HANDLE_TABLE"), _HANDLE_TABLE);
+
+    CSymParser::SymbolLayout PsLoadedModuleResource;
+    parser.GetSymbolLayout(_T("PsLoadedModuleResource"), PsLoadedModuleResource);
+    
+    
 	return	0;
 }

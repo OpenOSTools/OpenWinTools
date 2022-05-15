@@ -214,7 +214,7 @@ BOOL CSymParser::GetSymbolLayout(LPCTSTR SymbolName, SymbolLayout& SymInfo)
 	{
 		return FALSE;
 	}
-
+    
 	ULONG RootIndex = RootSymbolInfo->Index;
 	
 	GetSymName(RootIndex, SymInfo.Name);

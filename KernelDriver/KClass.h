@@ -2,12 +2,17 @@
 
 void* __cdecl operator new(size_t Size, POOL_TYPE Pool, ULONG tag = 'weNK');
 void* __cdecl operator new(size_t Size, POOL_TYPE Pool, EX_POOL_PRIORITY priority, ULONG tag = 'weNK');
-void __cdecl  operator delete(void* p, size_t);
+void __cdecl  operator delete(void* p,size_t s);
+void __cdecl  operator delete(void* p);
 
-class KSpinLock
+void* __cdecl operator new[](size_t Size, POOL_TYPE Pool, ULONG tag = 'weNK');
+void* __cdecl operator new[](size_t Size, POOL_TYPE Pool, EX_POOL_PRIORITY priority, ULONG tag = 'weNK');
+void __cdecl  operator delete[](void* p);
+
+class CKSpinLock
 {
 public:
-    KSpinLock()
+    CKSpinLock()
     {
         KeInitializeSpinLock(&m_LockObj);
     }
@@ -27,10 +32,10 @@ private:
     KIRQL       m_irql;
 };
 
-class KMutex
+class CKMutex
 {
 public:
-    KMutex() 
+    CKMutex() 
     {
         KeInitializeMutex(&m_LockObj, 0);
     }
@@ -51,22 +56,163 @@ private:
 
 
 template <typename T>
-class KAutoLock
+class CKAutoLock
 {
 private:
     T& _Lock;
 public:
-    KAutoLock(T& LockObj):_Lock(LockObj)
+    CKAutoLock(T& LockObj):_Lock(LockObj)
     {
         
         _Lock.Lock();
     }
 
-    ~KAutoLock()
+    ~CKAutoLock()
     {
         _Lock.UnLock();
     }
 };
 
-typedef	KAutoLock<KSpinLock>				CAutoSpinLock;
-typedef	KAutoLock<KMutex>				    CAutoMutex;
+typedef	CKAutoLock<CKSpinLock>				CKAutoSpinLock;
+typedef	CKAutoLock<CKMutex>				    CKAutoMutex;
+
+
+template <typename T>
+class CKBuffer
+{
+public:
+    CKBuffer(ULONG SizeInBytes, POOL_TYPE PoolType = NonPagedPool, ULONG Tag = 'fuBK') :m_Size(SizeInBytes)
+    {
+        m_Buffer = new(PoolType, Tag) char[SizeInBytes];
+
+    }
+
+    ~CKBuffer()
+    {
+        delete []m_Buffer;
+    }
+
+    T* Ptr()
+    {
+        return  (T*)m_Buffer;
+    }
+
+    T* operator->() 
+    { 
+        return Ptr();
+    }
+
+    operator T*()
+    {
+        return  (T*)m_Buffer;
+    }
+
+    ULONG Size()
+    {
+        return  m_Size;
+    }
+
+private:
+    ULONG   m_Size;
+    char*   m_Buffer;
+};
+
+
+class CKHandle
+{
+public:
+    CKHandle(HANDLE h) :m_h(h)
+    {
+
+    }
+
+    CKHandle()
+    {
+
+    }
+
+    VOID Close()
+    {
+        if (m_h)
+        {
+            ZwClose(m_h);
+            m_h = NULL;
+        }
+    }
+
+    VOID Attach(HANDLE h)
+    {
+        Close();
+        m_h = h;
+    }
+
+    HANDLE Detach()
+    {
+        HANDLE bak = m_h;
+        m_h = NULL;
+        return  bak;
+    }
+    ~CKHandle()
+    {
+        Close();
+    }
+
+    operator HANDLE()
+    {
+        return  m_h;
+    }
+
+    HANDLE* operator &()
+    {
+        return  &m_h;
+    }
+
+private:
+    HANDLE m_h;
+};
+
+class CKRefObj
+{
+public:
+    CKRefObj(
+        _In_ HANDLE Handle,
+        _In_ ACCESS_MASK DesiredAccess,
+        _In_opt_ POBJECT_TYPE ObjectType = NULL,
+        _In_ KPROCESSOR_MODE AccessMode = KernelMode,
+        _Out_opt_ POBJECT_HANDLE_INFORMATION HandleInformation = NULL
+    ):m_p(NULL)
+    {
+        m_st = ObReferenceObjectByHandle(Handle, DesiredAccess, ObjectType, AccessMode, &m_p, HandleInformation);
+       if (!STATUS_OK(m_st))
+       {
+           m_p = NULL;
+       }
+    }
+
+    CKRefObj(_In_ PVOID pObj):m_p(pObj)
+    {
+
+    }
+
+    NTSTATUS Status()
+    {
+        return  m_st;
+    }
+
+    BOOLEAN Valid()
+    {
+        return  m_p != NULL;
+    }
+
+    ~CKRefObj()
+    {
+        if (m_p)
+        {
+            ObDereferenceObject(m_p);
+        }
+    }
+
+private:
+    PVOID       m_p;
+    NTSTATUS    m_st;
+};

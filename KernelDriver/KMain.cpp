@@ -5,7 +5,7 @@
 #include "KDynData.h"
 #include "KProcess.h"
 
-
+DRIVER_OBJECT* g_DrvObj;
 
 PDEVICE_OBJECT	IODevObj;
 VOID OnUnload(PDRIVER_OBJECT pDrvObj)
@@ -76,7 +76,8 @@ NTSTATUS OnIOControl(PDEVICE_OBJECT pDevObj, IRP* pIRP)
 		Status = HandleIOControl(ulInputLen, ulOutputLen, pIRP->AssociatedIrp.SystemBuffer);
 		break;
 	default:
-		DbgPrint("Unknown ioctl code:%08x\n", ulCtlCode);
+        KLogPrint("Unknown ioctl code:%08x\n", ulCtlCode);
+        BreakPoint();
 		break;
 	}
 
@@ -93,7 +94,7 @@ NTSTATUS InitIODevice(PDRIVER_OBJECT pDrvObj)
 	RtlInitUnicodeString(&DeviceName, L"\\Device\\OpenWinTools");
 	Status = IoCreateDevice(pDrvObj, 0, &DeviceName, FILE_DEVICE_UNKNOWN, 0, FALSE, &IODevObj);
 
-	if (!SUCCESS(Status)){
+	if (!STATUS_OK(Status)){
 		return Status;
 	}
 
@@ -102,7 +103,7 @@ NTSTATUS InitIODevice(PDRIVER_OBJECT pDrvObj)
 	IoDeleteSymbolicLink(&SymName);
 	Status = IoCreateSymbolicLink(&SymName, &DeviceName);
 
-	if (!SUCCESS(Status)){
+	if (!STATUS_OK(Status)){
 		IoDeleteDevice(IODevObj);
 	}
 	IODevObj->Flags &= ~DO_DEVICE_INITIALIZING;
@@ -122,20 +123,49 @@ VOID InitDispatch(PDRIVER_OBJECT DrvObj)
 	DrvObj->DriverUnload = OnUnload;
 }
 
-
 NTSTATUS DriverEntry(PDRIVER_OBJECT DrvObj, PUNICODE_STRING RegistryPath)
 {
 	UNREFERENCED_PARAMETER(RegistryPath);
-	UNREFERENCED_PARAMETER(DrvObj);
-	ULONG n = 0;
+    BreakPoint();
+    g_DrvObj = DrvObj;
 
-    KSpinLock* Lock = new(PagedPool) KSpinLock;
+	ULONG n = 0x40000;
+    CKBuffer<IOKernelModuleInfo>    Buff(n);
+    
+    HandleEnumKernelModule(n, n, Buff);
+    
 
-    delete Lock;
-	
-	HandleEnumKernelModule(n, n, NULL);
 
-	return	STATUS_UNSATISFIED_DEPENDENCIES;
+    IOCTL_BUFF io;
+    io.PIO.IOType = 0;
+    io.PIO.IOLength = 1;
+    io.PIO.IOPort = 0x70;
+    io.PIO.WriteData = 9;
+    ULONG s = sizeof(io);
+    HandlePIO(s, s, &io);
+
+    io.PIO.IOType = 1;
+    io.PIO.IOLength = 1;
+    io.PIO.IOPort = 0x71;
+    s = sizeof(io);
+    HandlePIO(s, s, &io);
+
+
+    CKBuffer<UCHAR> TEMP(0X1000);
+
+    BreakPoint();
+    SIZE_T S = 0X1000;
+    KUtil_RWPhyMem(0, 0X1000, TEMP, S, FALSE);
+
+    KUtil_RWMsrSafe(0XFFFFFFFF, S, FALSE);
+
+
+    KIRQL IRQL =  KeAcquireQueuedSpinLock(LockQueueIoDatabaseLock);
+
+    
+    KeReleaseQueuedSpinLock(LockQueueIoDatabaseLock, IRQL);
+
+	return	STATUS_NO_MEMORY;
 
 /*
 	

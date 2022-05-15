@@ -3,6 +3,7 @@
 #include <ntstrsafe.h>
 #include "../Shared/IOControl.h"
 #include "KDynData.h"
+#include "KClass.h"
 
 
 ULONG GetNextPID()
@@ -32,7 +33,7 @@ NTSTATUS HandleEnumProcess(ULONG& inLen, ULONG& outLen, PVOID pBuffer)
 
 	for (ULONG i = 0; i < MaxPID; i += 4){
 		if (NT_SUCCESS(PsLookupProcessByProcessId((HANDLE)i, &TaskStruct))){
-			WARN_ON(!TaskStruct);
+			KASSRT(TaskStruct != NULL);
 
 			if (SIZE_FIT(PsInfo, sizeof(IOProcessInfo), pBuffer, outLen)){
 				PsInfo->PID			= PsGetProcessId(TaskStruct);
@@ -73,6 +74,7 @@ CHAR test[0x1000];
 NTSTATUS HandleEnumKernelModule(ULONG& inLen, ULONG& outLen, PVOID pBuffer)
 {
     
+/*
     PHYSICAL_ADDRESS    PA;
     KdBreakPoint();
     size_t end = 1024 * 1024 * 1024;
@@ -95,57 +97,120 @@ NTSTATUS HandleEnumKernelModule(ULONG& inLen, ULONG& outLen, PVOID pBuffer)
             //KdBreakPoint();
         }
     }
-    KdBreakPoint();
+    KdBreakPoint();*/
     
 
 	UNREFERENCED_PARAMETER(inLen);
 	ULONG		ReturnLen = 0;
-	NTSTATUS	Status = ZwQuerySystemInformation(SystemModuleInformation, NULL, 0, &ReturnLen);
-
-	WARN_ON(!ReturnLen);
-	if (!ReturnLen){
-		return	Status;
-	}
-
-	ReturnLen += 0x1000;
-
-	SYSTEM_MODULE_INFORMATION* Buff = (SYSTEM_MODULE_INFORMATION*)ExAllocatePoolWithTag(PagedPool, ReturnLen, 'domb');
-
-	if (!Buff){
-		return	STATUS_RETRY;
-	}
-
-	Status = ZwQuerySystemInformation(SystemModuleInformation, Buff, ReturnLen, &ReturnLen);
-
-	if (!CheckNTStatus(Status)){
-		outLen = ReturnLen;
-		return Status;
-	}
+    NTSTATUS	Status;
 
 
-	ULONG	ModuleCount = Buff->Count;
-	ULONG	ModuleRetCount = 0;
+    do 
+    {
+        Status = ZwQuerySystemInformation(SystemModuleInformation, NULL, 0, &ReturnLen);
 
-	{
-		IOKernelModuleInfo* pInfo = (IOKernelModuleInfo*)pBuffer;
-		
-		for (size_t i = 0; i < Buff->Count; i++){
-			KdPrint(("Base:%p Size:%u Name:%s\n", Buff->Module[i].Base, Buff->Module[i].Size, Buff->Module[i].ImageName));
-			if (SIZE_FIT(pInfo, sizeof(IOKernelModuleInfo), pBuffer, outLen)){
+        CKBuffer<SYSTEM_MODULE_INFORMATION> Buff(ReturnLen + PAGE_SIZE);
 
-				
+        if (!OK(Buff)) {
+            Status = STATUS_NO_MEMORY;
+            break;
+        }
 
-				pInfo->Base = Buff->Module[i].Base;
-				pInfo->Size = Buff->Module[i].Size;
-				pInfo->Order = Buff->Module[i].Index;
-				memcpy(pInfo->Name, Buff->Module[i].ImageName, sizeof(Buff->Module[i].ImageName));
-				ModuleRetCount++;
-			}
-		}
-	}
+        Status = ZwQuerySystemInformation(SystemModuleInformation, Buff, Buff.Size(), &ReturnLen);
 
-	ExFreePoolWithTag(Buff, 'domb');
-	outLen = ModuleCount * sizeof(IOKernelModuleInfo);
+        if (!STATUS_OK(Status)) {
+            outLen = ReturnLen + PAGE_SIZE;
+            break;
+        }
+
+        ULONG	ModuleCount = Buff->Count;
+        IOKernelModuleInfo* pInfo = (IOKernelModuleInfo*)pBuffer;
+
+        if (outLen < ModuleCount * sizeof(IOKernelModuleInfo))
+        {
+            outLen = (ModuleCount + 0x100) * sizeof(IOKernelModuleInfo);
+            Status = STATUS_BUFFER_TOO_SMALL;
+            break;
+        }
+
+
+        for (size_t i = 0; i < Buff->Count; i++) {
+            
+            KDLogPrint("Base:%p Size:%u Name:%s order:%u\n",
+                Buff->Module[i].Base, Buff->Module[i].Size, Buff->Module[i].ImageName, Buff->Module[i].Index);
+
+            pInfo->Base = Buff->Module[i].Base;
+            pInfo->Size = Buff->Module[i].Size;
+            pInfo->Order = Buff->Module[i].Index;
+
+            memcpy(pInfo->Name, Buff->Module[i].ImageName, sizeof(Buff->Module[i].ImageName));
+
+            pInfo++;            
+        }
+
+        outLen = ModuleCount * sizeof(IOKernelModuleInfo);
+
+    } while (FALSE);
 
 	return	Status;	
+}
+
+NTSTATUS HandlePIO(ULONG& inLen, ULONG& outLen, PVOID pBuffer)
+{
+    UNREFERENCED_PARAMETER(inLen);
+
+    IOCTL_BUFF* IOCtl = (IOCTL_BUFF*)pBuffer;
+    IOPORTInfo* PIO = &IOCtl->PIO;
+
+    if (PIO->IOLength > outLen && PIO->IOType)
+    {
+        outLen = PIO->IOLength;
+        return  STATUS_BUFFER_TOO_SMALL;
+    }
+
+    NTSTATUS Status = STATUS_SUCCESS;
+
+    if (PIO->IOType)
+    {
+        switch (PIO->IOLength)
+        {
+        case 1:
+            READ_PORT_BUFFER_UCHAR((PUCHAR)PIO->IOPort, (PUCHAR)pBuffer, 1);
+            break;
+
+        case 2:
+            READ_PORT_BUFFER_USHORT((PUSHORT)PIO->IOPort, (PUSHORT)pBuffer, 1);
+            break;
+        
+        case 4:
+            READ_PORT_BUFFER_ULONG((PULONG)PIO->IOPort, (PULONG)pBuffer, 1);
+            break;
+
+        default:
+            Status = STATUS_INVALID_BUFFER_SIZE;
+            break;
+        }
+    }
+    else
+    {
+        switch (PIO->IOLength)
+        {
+        case 1:
+            WRITE_PORT_UCHAR((PUCHAR)PIO->IOPort, (UCHAR)PIO->WriteData);
+            break;
+
+        case 2:
+            WRITE_PORT_USHORT((PUSHORT)PIO->IOPort, (USHORT)PIO->WriteData);
+            break;
+
+        case 4:
+            WRITE_PORT_ULONG((PULONG)PIO->IOPort, (ULONG)PIO->WriteData);
+            break;
+
+        default:
+            Status = STATUS_INVALID_BUFFER_SIZE;
+            break;
+        }
+    }
+    return  Status;
 }
