@@ -5,10 +5,10 @@
 
 extern DRIVER_OBJECT* g_DrvObj;
 
-#define KLogPrint(FMT, ...) DbgPrint("[KLog]"FMT"\n", __VA_ARGS__)
+#define KLogPrint(FMT, ...) DbgPrintEx(DPFLTR_IHVDRIVER_ID, DPFLTR_ERROR_LEVEL,"[KLog]"FMT"\n", __VA_ARGS__)
 
 #ifdef  DBG
-#define KDLogPrint(FMT, ...) DbgPrint("[KLog]"FMT"\n", __VA_ARGS__)
+#define KDLogPrint(FMT, ...) DbgPrintEx(DPFLTR_IHVDRIVER_ID, DPFLTR_ERROR_LEVEL, "[KLog]"FMT"\n", __VA_ARGS__)
 #else
 #define KDLogPrint(FMT, ...)
 #endif

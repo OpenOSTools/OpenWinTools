@@ -194,6 +194,13 @@ public:
 
     }
 
+    PVOID Detach()
+    {
+        PVOID Ret = m_p;
+        m_p = NULL;
+        return  Ret;
+    }
+
     NTSTATUS Status()
     {
         return  m_st;

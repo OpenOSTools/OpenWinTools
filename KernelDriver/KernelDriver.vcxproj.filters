@@ -167,6 +167,9 @@
     <Filter Include="Source Files\KPerfCounter">
       <UniqueIdentifier>{d6766fd0-40d2-4a01-96e2-bf355293c78c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\KWin">
+      <UniqueIdentifier>{929b8a99-8969-40d7-8b78-cab4dea309fc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="KMain.cpp">
@@ -192,6 +195,12 @@
     </ClCompile>
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="KPEParser.cpp">
+      <Filter>Source Files\KWin</Filter>
+    </ClCompile>
+    <ClCompile Include="KFile.cpp">
+      <Filter>Source Files\KWin</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -224,6 +233,12 @@
     </ClInclude>
     <ClInclude Include="stdafx.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="KPEParser.h">
+      <Filter>Source Files\KWin</Filter>
+    </ClInclude>
+    <ClInclude Include="KFile.h">
+      <Filter>Source Files\KWin</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
