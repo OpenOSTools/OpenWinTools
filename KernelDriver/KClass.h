@@ -81,10 +81,23 @@ template <typename T>
 class CKBuffer
 {
 public:
-    CKBuffer(ULONG SizeInBytes, POOL_TYPE PoolType = NonPagedPool, ULONG Tag = 'fuBK') :m_Size(SizeInBytes)
+    CKBuffer(ULONG SizeInBytes, POOL_TYPE PoolType = NonPagedPool, ULONG Tag = 'fuBK')
     {
-        m_Buffer = new(PoolType, Tag) char[SizeInBytes];
+        Alloc(SizeInBytes, PoolType, Tag);
+    }
 
+    CKBuffer()
+    {
+        m_Size = 0;
+        m_Buffer = NULL;
+    }
+
+    T* Alloc(ULONG SizeInBytes, POOL_TYPE PoolType = NonPagedPool, ULONG Tag = 'fuBK')
+    {
+        delete m_Buffer;
+        m_Size = SizeInBytes;
+        m_Buffer = new(PoolType, Tag) char[m_Size];
+        return  (T*)m_Buffer;
     }
 
     ~CKBuffer()
@@ -115,6 +128,31 @@ public:
 private:
     ULONG   m_Size;
     char*   m_Buffer;
+};
+
+class CKAttachProcess
+{
+public:
+    CKAttachProcess(PEPROCESS PsObj)
+    {
+        if (PsObj)
+        {
+            KeStackAttachProcess(PsObj, &m_State);
+            m_Attached = TRUE;
+        }
+    }
+
+    ~CKAttachProcess()
+    {
+        if (m_Attached)
+        {
+            KeUnstackDetachProcess(&m_State);
+        }
+    }
+
+private:
+    KAPC_STATE m_State;
+    BOOLEAN m_Attached;
 };
 
 

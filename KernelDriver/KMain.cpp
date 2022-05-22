@@ -4,6 +4,7 @@
 #include "IOControlHandler.h"
 #include "KDynData.h"
 #include "KProcess.h"
+#include "KClass.h"
 
 DRIVER_OBJECT* g_DrvObj;
 
@@ -134,6 +135,39 @@ NTSTATUS DriverEntry(PDRIVER_OBJECT DrvObj, PUNICODE_STRING RegistryPath)
     
     HandleEnumKernelModule(n, n, Buff);
     
+    
+    {
+        CKAttachProcess PsContext(PsInitialSystemProcess);
+
+        MEMORY_BASIC_INFORMATION    MemoryInfo;
+        SIZE_T  RetLen;
+        NTSTATUS Status;
+
+        SIZE_T  BaseAddr = 0;
+
+        while (NT_SUCCESS(ZwQueryVirtualMemory(NtCurrentProcess(),
+            (PVOID)BaseAddr, MemoryBasicInformation,
+            &MemoryInfo, sizeof(MemoryInfo), &RetLen)))
+        {
+#define MemoryMappedFilenameInformation 2
+
+            CKBuffer<UNICODE_STRING>    Buffer(0x1000);
+            SIZE_T Tmp;
+            if (NT_SUCCESS(ZwQueryVirtualMemory(NtCurrentProcess(),
+                MemoryInfo.AllocationBase,
+                (MEMORY_INFORMATION_CLASS)MemoryMappedFilenameInformation,
+                Buffer, Buffer.Size(),
+                &Tmp)))
+            {
+                KDLogPrint("%wZ Base:%p Size:%u", Buffer.Ptr(), MemoryInfo.AllocationBase, MemoryInfo.RegionSize);
+            }
+
+            BaseAddr += MemoryInfo.RegionSize;
+        }
+    }
+    
+
+
 
 
     IOCTL_BUFF io;

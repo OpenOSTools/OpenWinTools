@@ -90,6 +90,7 @@ enum DATA_TYPE
 	Base_NTOS,
 	Offset_PSPCIDTABLE,
 	Offset_NextPID,
+    Offset_
 	DATA_MAX
 };
 

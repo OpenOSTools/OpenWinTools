@@ -144,6 +144,7 @@
     <ClCompile Include="KClass.cpp" />
     <ClCompile Include="KDynData.cpp" />
     <ClCompile Include="KFile.cpp" />
+    <ClCompile Include="KNTCall.cpp" />
     <ClCompile Include="KPEParser.cpp" />
     <ClCompile Include="KProcess.cpp" />
     <ClCompile Include="KUtils.cpp" />
@@ -158,10 +159,12 @@
     <ClInclude Include="KClass.h" />
     <ClInclude Include="KDynData.h" />
     <ClInclude Include="KFile.h" />
+    <ClInclude Include="KNTCall.h" />
     <ClInclude Include="KPEParser.h" />
     <ClInclude Include="KProcess.h" />
     <ClInclude Include="KUtils.h" />
     <ClInclude Include="Main.h" />
+    <ClInclude Include="NTInternal.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

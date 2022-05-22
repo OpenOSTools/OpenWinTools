@@ -23,9 +23,6 @@
     <Filter Include="Source Files\KProcessThread">
       <UniqueIdentifier>{1859421a-81ec-4f27-9f91-9b4904a8421a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\KFile">
-      <UniqueIdentifier>{6d45db92-e7a6-46e5-8dba-aae681f51da3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\KHook">
       <UniqueIdentifier>{caa8aa82-51c7-4e2c-bdd5-26cfaad6f911}</UniqueIdentifier>
     </Filter>
@@ -202,6 +199,9 @@
     <ClCompile Include="KFile.cpp">
       <Filter>Source Files\KWin</Filter>
     </ClCompile>
+    <ClCompile Include="KNTCall.cpp">
+      <Filter>Source Files\KWin</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main.h">
@@ -239,6 +239,12 @@
     </ClInclude>
     <ClInclude Include="KFile.h">
       <Filter>Source Files\KWin</Filter>
+    </ClInclude>
+    <ClInclude Include="KNTCall.h">
+      <Filter>Source Files\KWin</Filter>
+    </ClInclude>
+    <ClInclude Include="NTInternal.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
